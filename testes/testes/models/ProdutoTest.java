@@ -29,7 +29,7 @@ public class ProdutoTest {
 
 	public void a_produto_should_be_save_new_produto() {
 		Dao<Produto> dao = new Dao<>(Produto.class, new JPAUtil().getManager());
-		produto = dao.create(ModelFactory.criarProdutos().get(0));
+		produto = dao.save(ModelFactory.criarProdutos().get(0));
 		assertTrue(produto != null);
 	}
 
@@ -37,14 +37,13 @@ public class ProdutoTest {
 		Dao<Produto> dao = new Dao<>(Produto.class, new JPAUtil().getManager());
 		Produto produtoGeted = dao.retrivetbyId(produto.getProdutoId());
 		assertTrue(produtoGeted.getNome().equals(produto.getNome()));
-		System.out.println(produto.getProdutoId());
 
 	}
 
 	public void c_produto_should_be_update_an_produto() {
 		Dao<Produto> dao = new Dao<>(Produto.class, new JPAUtil().getManager());
-		Produto produtoGeted = dao.update(produto);
-		assertTrue(produtoGeted.getPreco() != produto.getPreco());
+		Produto produtoGeted = dao.save(produto);
+		assertTrue(produtoGeted.equals(produto));
 	}
 
 	public void d_produto_should_be_getAll_produtos() {

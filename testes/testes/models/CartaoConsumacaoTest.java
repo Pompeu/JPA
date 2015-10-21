@@ -16,50 +16,50 @@ import testes.factorys.ModelFactory;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CartaoConsumacaoTest {
 
-	CartaoConsumacao catao = null;
+	CartaoConsumacao cartao = null;
 
 	@Test
 	public void teste_all() {
-		a_catao_should_be_save_new_catao();
-		b_catao_should_be_get_an_catao();
-		c_catao_should_be_update_an_catao();
-		d_catao_should_be_getAll_cataos();
-		e_catao_should_be_remove_an_catao();
+		a_cartao_should_be_save_new_cartao();
+		b_cartao_should_be_get_an_cartao();
+		c_cartao_should_be_update_an_cartao();
+		d_cartao_should_be_getAll_cartaos();
+		e_cartao_should_be_remove_an_cartao();
 	}
 
-	public void a_catao_should_be_save_new_catao() {
+	public void a_cartao_should_be_save_new_cartao() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
-		catao = dao.create(ModelFactory.criarCartoes().get(0));
-		assertTrue(catao != null);
+		cartao = dao.save(ModelFactory.criarCartoes().get(0));
+		assertTrue(cartao != null);
 	}
 
-	public void b_catao_should_be_get_an_catao() {
+	public void b_cartao_should_be_get_an_cartao() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
-		CartaoConsumacao cataoGeted = dao.retrivetbyId(catao.getCartaoId());
-		assertTrue(cataoGeted.getSaldo() == catao.getSaldo());
+		CartaoConsumacao cartaoGeted = dao.retrivetbyId(cartao.getCartaoId());
+		assertTrue(cartaoGeted.getSaldo() == cartao.getSaldo());
 	}
 
-	public void c_catao_should_be_update_an_catao() {
+	public void c_cartao_should_be_update_an_cartao() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
-		CartaoConsumacao cataoGeted = dao.update(catao);
-		assertTrue(cataoGeted.getSaldo() != catao.getSaldo());
+		CartaoConsumacao cartaoGeted = dao.save(cartao);
+		assertTrue(cartaoGeted.equals(cartao));
 
 	}
 
-	public void d_catao_should_be_getAll_cataos() {
+	public void d_cartao_should_be_getAll_cartaos() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
 		List<CartaoConsumacao> retrivetAll = dao.retrivetAll();
 		assertTrue(retrivetAll.size() != 0);
 	}
 
-	public void e_catao_should_be_remove_an_catao() {
+	public void e_cartao_should_be_remove_an_cartao() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
-		boolean deleted = dao.delete(catao);
+		boolean deleted = dao.delete(cartao);
 		assertTrue(deleted);
 	}
 }

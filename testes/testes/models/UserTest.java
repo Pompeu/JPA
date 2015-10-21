@@ -29,7 +29,7 @@ public class UserTest {
 
 	public void a_user_should_be_save_new_user() {
 		Dao<User> dao = new Dao<>(User.class, new JPAUtil().getManager());
-		user = dao.create(ModelFactory.criarUsers().get(0));
+		user = dao.save(ModelFactory.criarUsers().get(0));
 		assertTrue(user != null);
 	}
 
@@ -37,15 +37,12 @@ public class UserTest {
 		Dao<User> dao = new Dao<>(User.class, new JPAUtil().getManager());
 		User userGeted = dao.retrivetbyId(user.getId());
 		assertTrue(userGeted.getCpf().equals(user.getCpf()));
-		System.out.println(user.getId());
-
 	}
 
 	public void c_user_should_be_update_an_user() {
 		Dao<User> dao = new Dao<>(User.class, new JPAUtil().getManager());
-		User userGeted = dao.update(user);
-		assertTrue(!userGeted.getCpf().equals(user.getCpf()));
-
+		User userGeted = dao.save(user);
+		assertTrue(userGeted.getId() instanceof Integer);
 	}
 
 	public void d_user_should_be_getAll_users() {

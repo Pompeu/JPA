@@ -20,9 +20,13 @@ public class Dao<T> implements Serializable {
 
 	}
 
-	public T create(T obj) {
+	public T save(T obj) {
 		em.getTransaction().begin();
-		em.persist(obj);
+		if (GetValuePrimaryKey.getID(obj) != null) {
+			em.merge(obj);
+		} else {
+			em.persist(obj);
+		}
 		em.getTransaction().commit();
 		em.close();
 		return obj;
@@ -30,20 +34,12 @@ public class Dao<T> implements Serializable {
 
 	public boolean delete(T obj) {
 		em.getTransaction().begin();
-		obj = em.find(classe, PegarPkKeyTempoExecucao.getIdObjeto(obj));
+		obj = em.find(classe, GetValuePrimaryKey.getID(obj));
 		em.remove(obj);
 		em.getTransaction().commit();
 		em.close();
 		return true;
 
-	}
-
-	public T update(T obj) {
-		em.getTransaction().begin();
-		em.merge(obj);
-		em.getTransaction().commit();
-		em.close();
-		return obj;
 	}
 
 	public List<T> retrivetAll() {

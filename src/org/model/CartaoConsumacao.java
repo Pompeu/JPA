@@ -1,5 +1,8 @@
 package org.model;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,19 +12,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "catoes")
-public class CartaoConsumacao {
+public class CartaoConsumacao implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "cartaoId", sequenceName = "cartoes_id_seq", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cartaoId")
 	private Integer cartaoId;
-	private double saldo;
+	private BigDecimal saldo;
 	private User userId;
 
 	CartaoConsumacao() {
 	}
 
-	public CartaoConsumacao(double saldo, User userId) {
+	public CartaoConsumacao(BigDecimal saldo, User userId) {
 		this.saldo = saldo;
 		this.userId = userId;
 	}
@@ -30,7 +34,7 @@ public class CartaoConsumacao {
 		return cartaoId;
 	}
 
-	public double getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 

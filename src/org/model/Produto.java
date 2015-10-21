@@ -1,5 +1,8 @@
 package org.model;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,18 +12,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produtos")
-public class Produto {
+public class Produto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "produtoId", sequenceName = "produtos_id_seq", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produtoId")
 	private Integer produtoId;
 	private String nome;
-	private double preco;
+	private BigDecimal preco;
 
 	Produto() {
 	}
 
-	public Produto( String nome, double preco) {
+	public Produto(String nome, BigDecimal preco) {
 		this.nome = nome;
 		this.preco = preco;
 	}
@@ -33,7 +38,7 @@ public class Produto {
 		return nome;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 

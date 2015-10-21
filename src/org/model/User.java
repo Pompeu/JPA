@@ -1,5 +1,7 @@
 package org.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,8 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
-	
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "id", sequenceName = "users_id_seq", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id")

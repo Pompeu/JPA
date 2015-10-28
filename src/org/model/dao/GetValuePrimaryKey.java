@@ -7,6 +7,7 @@ public class GetValuePrimaryKey {
 	}
 
 	public static Integer getID(Object object) {
+		
 		Field field = object.getClass().getDeclaredFields()[1];
 		field.setAccessible(true);
 		Integer id = null;
@@ -17,5 +18,6 @@ public class GetValuePrimaryKey {
 		}
 
 		return id;
+		
 	}
 }

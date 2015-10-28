@@ -1,4 +1,4 @@
-package testes.models;
+package testes.models.dao;
 
 import static org.junit.Assert.assertTrue;
 
@@ -62,4 +62,5 @@ public class CartaoConsumacaoTest {
 		boolean deleted = dao.delete(cartao);
 		assertTrue(deleted);
 	}
+	
 }

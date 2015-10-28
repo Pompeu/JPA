@@ -22,6 +22,7 @@ public class Dao<T> implements Serializable {
 
 	public T save(T obj) {
 		em.getTransaction().begin();
+		
 		if (GetValuePrimaryKey.getID(obj) != null) {
 			em.merge(obj);
 		} else {
@@ -39,7 +40,6 @@ public class Dao<T> implements Serializable {
 		em.getTransaction().commit();
 		em.close();
 		return true;
-
 	}
 
 	public List<T> retrivetAll() {

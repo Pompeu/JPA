@@ -12,21 +12,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "catoes")
-public class CartaoConsumacao implements Serializable{
+public class CartaoConsumacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "cartaoId", sequenceName = "cartoes_id_seq", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cartaoId")
 	private Integer cartaoId;
-	private BigDecimal saldo;
+	private BigDecimal saldoInicial;
 	private User userId;
 
 	CartaoConsumacao() {
 	}
 
-	public CartaoConsumacao(BigDecimal saldo, User userId) {
-		this.saldo = saldo;
+	public CartaoConsumacao(BigDecimal saldoInicial, User userId) {
+		this.saldoInicial = saldoInicial;
 		this.userId = userId;
 	}
 
@@ -35,7 +35,7 @@ public class CartaoConsumacao implements Serializable{
 	}
 
 	public BigDecimal getSaldo() {
-		return saldo;
+		return saldoInicial;
 	}
 
 	public User getUserId() {
@@ -44,7 +44,7 @@ public class CartaoConsumacao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CartaoConsumacao [cartaoId=" + cartaoId + ", saldo=" + saldo
+		return "CartaoConsumacao [cartaoId=" + cartaoId + ", saldoInicial=" + saldoInicial
 				+ ", userId=" + userId + "]";
 	}
 

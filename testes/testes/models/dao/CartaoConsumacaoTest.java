@@ -4,10 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.model.CartaoConsumacao;
+import org.model.User;
 import org.model.dao.Dao;
 import org.model.util.JPAUtil;
 
@@ -17,6 +20,20 @@ import testes.factorys.ModelFactory;
 public class CartaoConsumacaoTest {
 
 	CartaoConsumacao cartao = null;
+
+	static User user;
+
+	@BeforeClass
+	public static void tearUp() {
+		Dao<User> dao = new Dao<>(User.class);
+		user = dao.save(ModelFactory.criarUsers().get(1));
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		Dao<User> dao = new Dao<>(User.class);
+		dao.delete(user);
+	}
 
 	@Test
 	public void teste_all() {
@@ -30,7 +47,7 @@ public class CartaoConsumacaoTest {
 	public void a_cartao_should_be_save_new_cartao() {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
-		cartao = dao.save(ModelFactory.criarCartoes().get(0));
+		cartao = dao.save(ModelFactory.criarCartoes(user).get(0));
 		assertTrue(cartao != null);
 	}
 
@@ -38,7 +55,7 @@ public class CartaoConsumacaoTest {
 		Dao<CartaoConsumacao> dao = new Dao<>(CartaoConsumacao.class,
 				new JPAUtil().getManager());
 		CartaoConsumacao cartaoGeted = dao.retrivetbyId(cartao.getCartaoId());
-		assertTrue(cartaoGeted.getSaldo() == cartao.getSaldo());
+		assertTrue(cartaoGeted.getSaldo().equals(cartao.getSaldo()));
 	}
 
 	public void c_cartao_should_be_update_an_cartao() {
@@ -62,5 +79,5 @@ public class CartaoConsumacaoTest {
 		boolean deleted = dao.delete(cartao);
 		assertTrue(deleted);
 	}
-	
+
 }

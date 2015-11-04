@@ -23,16 +23,16 @@ public class RegistradorCaixaTest {
 	@Before
 	public void before() {
 		user = ModelFactory.criarUsers().get(0);
-		cartao = ModelFactory.criarCartoes().get(0);
+		cartao = ModelFactory.criarCartoes(user).get(0);
 		produtos = ModelFactory.criarProdutos();
 		caixa = new RegistradorCaixa(user, cartao, produtos);
 	}
 
-		
 	@Test
 	public void venda_should_be_have_a_total() {
 		double total = produtos.stream()
 				.mapToDouble(p -> p.getPreco().doubleValue()).sum();
-		assertEquals(new BigDecimal(total), caixa.getTotal());
+		assertEquals(new BigDecimal(total).setScale(2), caixa.getTotal());
 	}
+
 }

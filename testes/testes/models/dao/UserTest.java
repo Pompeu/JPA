@@ -28,7 +28,7 @@ public class UserTest {
 	}
 
 	public void a_user_should_be_save_new_user() {
-		Dao<User> dao = new Dao<>(User.class, new JPAUtil().getManager());
+		Dao<User> dao = new Dao<>(User.class);
 		user = dao.save(ModelFactory.criarUsers().get(0));
 		assertTrue(user != null);
 	}

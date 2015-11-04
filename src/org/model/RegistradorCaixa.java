@@ -32,7 +32,7 @@ public class RegistradorCaixa {
 	public BigDecimal getTotal() {
 		final double sum = getProdutos().stream()
 				.mapToDouble(p -> p.getPreco().doubleValue()).sum();
-		return new BigDecimal(sum);
+		return new BigDecimal(sum).setScale(2);
 	}
 
 	@Override

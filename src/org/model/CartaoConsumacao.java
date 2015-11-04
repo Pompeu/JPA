@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,13 +21,14 @@ public class CartaoConsumacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cartaoId")
 	private Integer cartaoId;
 	private BigDecimal saldoInicial;
+	@OneToOne
 	private User userId;
 
 	CartaoConsumacao() {
 	}
 
 	public CartaoConsumacao(BigDecimal saldoInicial, User userId) {
-		this.saldoInicial = saldoInicial;
+		this.saldoInicial = saldoInicial.setScale(2);
 		this.userId = userId;
 	}
 
@@ -35,7 +37,7 @@ public class CartaoConsumacao implements Serializable {
 	}
 
 	public BigDecimal getSaldo() {
-		return saldoInicial;
+		return saldoInicial.setScale(2);
 	}
 
 	public User getUserId() {

@@ -7,8 +7,11 @@ import java.util.List;
 import org.model.CartaoConsumacao;
 import org.model.Produto;
 import org.model.User;
+import org.model.dao.Dao;
+import org.model.util.JPAUtil;
 
 public class ModelFactory {
+
 
 	public static List<User> criarUsers() {
 
@@ -28,17 +31,10 @@ public class ModelFactory {
 
 	}
 
-	public static List<CartaoConsumacao> criarCartoes() {
+	public static List<CartaoConsumacao> criarCartoes(User user) {
 
-		return Arrays.asList(new CartaoConsumacao(BigDecimal.valueOf(2.50),
-				new User("Pompeu", "Pompeu", "123456", "Cliente", "6434441827",
-						"03311255688")),
-				new CartaoConsumacao(BigDecimal.valueOf(2.50), new User(
-						"Pompeu2", "Pompeu2", "123456", "Cliente",
-						"6434441827", "03311255688")), new CartaoConsumacao(
-						BigDecimal.valueOf(2.50), new User("Pompeu3",
-								"Pompeu3", "123456", "Cliente", "6434441827",
-								"03311255688")));
+		return Arrays.asList(new CartaoConsumacao(BigDecimal.valueOf(50.00),
+				user));
 
 	}
 }

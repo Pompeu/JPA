@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.model.util.JPAUtil;
+
 public class Dao<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,11 @@ public class Dao<T> implements Serializable {
 		this.em = em;
 
 	}
+	public Dao(Class<T> classe) {
+		this.classe = classe;
+		this.em = new JPAUtil().getManager();
 
+	}
 	public T save(T obj) {
 		em.getTransaction().begin();
 		
